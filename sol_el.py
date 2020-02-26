@@ -4,14 +4,21 @@ import time
 duvar = "#"
 karakter = "A"
 
-labirentBoyut = 4
-karakterX = 3
-karakterY = 3
+baslangic = [4,3]
+bitis = [3,3]
+karakterX = baslangic[1]
+karakterY = baslangic[0]
+bitisX = bitis[1]
+bitisY = bitis[0]
 yonelim = "Y" # Y yukarı A aşağı L sol R sağ
-labirent = [["#",0, 0, 0],
-            ["#",0,"#",0],
-            ["#",0,"#",0],
-            ["#",0,"#",0]]
+labirent = [["#","#","#","#","#","#","#"],
+            ["#","/","/","/","/","/","#"],
+            ["#","/","#","#","#","/","#"],
+            ["#","/","#","/","#","/","#"],
+            ["#","/","/","/","/","/","#"],
+            ["#","#","#","/","#","#","#"],]
+maxX = len(labirent[0])
+maxY = len(labirent)
 # Önce y sonra x kullanılıyor
 def duvar_kontrol(labirent,y,x):
     global yonelim
@@ -22,14 +29,14 @@ def duvar_kontrol(labirent,y,x):
         elif y - 1 >= 0 and labirent[y - 1][x] != duvar: #ön duvar
             print("Öne git")
             return 2
-        elif x + 1 <= labirentBoyut and labirent[y][x + 1] != duvar: #sağ duvar
+        elif x + 1 < maxX and labirent[y][x + 1] != duvar: #sağ duvar
             print("Sağa dön")
             return 3
         else:
             print("180 dön")
             return 4
     elif yonelim == "L":
-        if y + 1 <= labirentBoyut and labirent[y + 1][x] != duvar: #sol duvar
+        if y + 1 < maxY and labirent[y + 1][x] != duvar: #sol duvar
             print("Sola dön")
             return 1
         elif x - 1 >= 0 and labirent[y][x-1] != duvar:#ön duvar
@@ -42,10 +49,10 @@ def duvar_kontrol(labirent,y,x):
             print("180 dön")
             return 4
     elif yonelim == "A":
-        if x + 1 <= labirentBoyut and labirent[y][x + 1] != duvar: #sol duvar
+        if x + 1 < maxX and labirent[y][x + 1] != duvar: #sol duvar
             print("Sola dön")
             return 1
-        elif y + 1 <= labirentBoyut and labirent[y + 1][x] != duvar: #ön duvar
+        elif y + 1 < maxY and labirent[y + 1][x] != duvar: #ön duvar
             print("Düz git")
             return 2
         elif x - 1 >= 0 and labirent[y][x-1] != duvar:#sağ duvar
@@ -58,16 +65,14 @@ def duvar_kontrol(labirent,y,x):
         if y - 1 >= 0 and labirent[y - 1][x] != duvar: #sol duvar
             print("Sola dön")
             return 1
-        elif x + 1 <= labirentBoyut and labirent[y][x + 1] != duvar: #ön duvar
+        elif x + 1 < maxX and labirent[y][x + 1] != duvar: #ön duvar
             print("Düz git")
             return 2
-        elif y + 1 <= labirentBoyut and labirent[y + 1][x] != duvar: #sağ duvar
+        elif y + 1 < maxY and labirent[y + 1][x] != duvar: #sağ duvar
             print("Sağa dön")
-            yonelim = "A"
             return 3
         else:
             print("180 dön")
-            yonelim = "L"
             return 4
             
 def hareket(labirent,y,x,mod):
@@ -145,14 +150,14 @@ def hareket(labirent,y,x,mod):
     karakterX = yeniX
     karakterY = yeniY
 def labirent_ciz(labirent):
-    for i in range(4):
+    for i in range(maxY):
         print(labirent[i])
 labirent_ciz(labirent)
-while(labirent[3][1] != karakter):
+while(labirent[bitisY][bitisX] != karakter):
     mod = duvar_kontrol(labirent,karakterY,karakterX)
     hareket(labirent,karakterY,karakterX,mod)
     labirent_ciz(labirent)
-    time.sleep(2)
+    time.sleep(0.5)
 
     
 
