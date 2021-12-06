@@ -278,8 +278,10 @@ def hareket(labirent,y,x,mod):
         hareket(labirent,yeniY,yeniX,yon)
         birKez = 0
 def labirent_ciz(labirent):
-    for i in range(maxY):
-        print(labirent[i])
+    for y in range(maxY):
+        for x in range(maxX):
+            print(labirent[y][x],end = " ")
+        print()
 def kesisimini_bul(labirent,y,x,yonelim):
     if yonelim == "Y":
         if kesisim_mi(labirent,y - 1,x): # ön
@@ -374,5 +376,4 @@ while(labirent[bitisY][bitisX] != karakter):
     labirent_ciz(labirent)
     time.sleep(0.5)
     print("Önceki =")
-    print(onceki)    
-
+    print(onceki) 
