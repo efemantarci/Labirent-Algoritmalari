@@ -150,14 +150,13 @@ def hareket(labirent,y,x,mod):
     karakterX = yeniX
     karakterY = yeniY
 def labirent_ciz(labirent):
-    for i in range(maxY):
-        print(labirent[i])
+    for y in range(maxY):
+        for x in range(maxX):
+            print(labirent[y][x],end = " ")
+        print()
 labirent_ciz(labirent)
 while(labirent[bitisY][bitisX] != karakter):
     mod = duvar_kontrol(labirent,karakterY,karakterX)
     hareket(labirent,karakterY,karakterX,mod)
     labirent_ciz(labirent)
     time.sleep(0.5)
-
-    
-
